@@ -4,8 +4,8 @@ const gameContainer = document.querySelector("#game-container");
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
     parent: gameContainer,
     scale: {
         mode: Phaser.Scale.FIT,
@@ -25,9 +25,28 @@ function preload() {
 }
 
 function create() {
-    const player = new Player(this, 100, 100);
+    createKeys(this);
+    createPlayer(this);
 }
 
 function update() {
+    this.player.update();
+}
 
+// Functions
+
+function createPlayer(scene) {
+    scene.player = new Player(
+        scene,
+        window.innerWidth / 2,
+        window.innerHeight - 120
+    );
+}
+
+function createKeys(scene) {
+    scene.cursors = scene.input.keyboard.createCursorKeys();
+    scene.wKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    scene.aKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+    scene.sKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+    scene.dKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 }
