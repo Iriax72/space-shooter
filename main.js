@@ -3,7 +3,7 @@ import {Player} from "./Player.js"
 const gameContainer = document.querySelector("#game-container");
 
 const config = {
-    type: phaser.AUTO,
+    type: Phaser.AUTO,
     width: 800,
     height: 600,
     parent: gameContainer,
