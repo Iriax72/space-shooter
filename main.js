@@ -29,8 +29,9 @@ function create() {
     createPlayer(this);
 }
 
-function update() {
-    this.player.update();
+function update(time, delta) {
+    if (this.player) 
+        {this.player.update(delta);}
 }
 
 // Functions
