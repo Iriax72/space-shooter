@@ -34,6 +34,10 @@ function update(time, delta) {
         {this.player.update(delta);}
 }
 
+window.addEventListener("resize", () => {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+});
+
 // Functions
 
 function createPlayer(scene) {

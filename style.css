@@ -1,4 +1,9 @@
 html body{
     margin: 0;
-    padding: 
+    padding: 0;
+    overflow: hidden;
+}
+
+#game{
+    margin: 0;
 }
