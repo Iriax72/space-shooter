@@ -9,7 +9,7 @@ const config = {
     height: window.innerHeight,
     parent: gameContainer,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     scene: {
@@ -43,14 +43,10 @@ function update(time, delta) {
         })
     }
     // Spawn meteors
-    if (Math.random() < 0.5 * (delta / 1000)) {
+    if (Math.random() < 0.3 * (delta / 1000)) {
         spawnMeteor(this);
     }
 }
-
-window.addEventListener("resize", () => {
-    game.scale.resize(window.innerWidth, window.innerHeight);
-});
 
 // Functions
 
