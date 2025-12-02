@@ -1,4 +1,5 @@
 import {Player} from "./Player.js"
+import {Meteor} from "./Meteor.js"
 
 const gameContainer = document.querySelector("#game-container");
 
@@ -21,7 +22,8 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-    this.load.image("playerImg", "./assets/player.png")
+    this.load.image("playerImg", "./assets/player.png");
+    this.load.image("meteorImg", "./assets/meteor.png");
 }
 
 function create() {
@@ -30,8 +32,19 @@ function create() {
 }
 
 function update(time, delta) {
-    if (this.player) 
-        {this.player.update(delta);}
+    // Update all sprites:
+    if (this.player) {
+        this.player.update(delta);
+    }
+    if (this.meteors) {
+        this.meteors.forEach(meteor => {
+            meteor.update(delta);
+        })
+    }
+    // Spawn meteors
+    if (Math.random() < 0.02 * (delta / 1000)) {
+        spawnMeteor(this);
+    }
 }
 
 window.addEventListener("resize", () => {
@@ -54,4 +67,14 @@ function createKeys(scene) {
     scene.aKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     scene.sKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     scene.dKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+}
+
+function spawnMeteor(scene) {
+    scene.meteors += [new Meteor(
+        scene,
+        Math.random() * window.innerWidth,
+        -50,
+        100 + 50 * Math.random(),
+        0.1 + 0.1 * Math.random()
+    )]
 }
