@@ -71,11 +71,11 @@ function createKeys(scene) {
 }
 
 function spawnMeteor(scene) {
-    scene.meteors += [new Meteor(
+    scene.meteors.push(new Meteor(
         scene,
         Math.random() * window.innerWidth,
         -50,
         100 + 50 * Math.random(),
         0.1 + 0.1 * Math.random()
-    )]
+    ));
 }

@@ -16,8 +16,7 @@ export class Meteor extends Phaser.GameObjects.Sprite{
     }
 
     move(delta){
-        dt =
-        delta / 1000;
+        const dt = delta / 1000;
         this.y += this.speed * dt;
 
         if (this.y > window.innerHeight + this.height) {
