@@ -43,7 +43,7 @@ function update(time, delta) {
         })
     }
     // Spawn meteors
-    if (Math.random() < 0.02 * (delta / 1000)) {
+    if (Math.random() < 0.5 * (delta / 1000)) {
         spawnMeteor(this);
     }
 }
