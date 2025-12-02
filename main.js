@@ -29,6 +29,7 @@ function preload() {
 function create() {
     createKeys(this);
     createPlayer(this);
+    this.meteors = [];
 }
 
 function update(time, delta) {
