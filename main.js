@@ -44,7 +44,7 @@ function create() {
 function update(time, delta) {
     // Update all sprites:
     if (this.player) {
-        this.player.update();
+        this.player.update(time, delta);
     }
     if (this.meteors) {
         this.meteors.forEach(meteor => {

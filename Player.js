@@ -12,7 +12,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.velocity = new Phaser.Math.Vector2(0, 0);
     }
 
-    update() {
+    update(time, delta) {
         this.move();
     }
 
