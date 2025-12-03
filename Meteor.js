@@ -17,17 +17,18 @@ export class Meteor extends Phaser.GameObjects.Sprite{
         if (this.y > window.innerHeight + this.height) {
             this.destroy();
         }
-        
-        this.scene.physics.overlap(
-            this,
-            this.scene.player,
-            (this) => {
-                this.scene.player.hit();
+        checkCollision(this, this.scene.player);
+    }
+
+    checkCollision(meteor, player) {
+        meteor.scene.physics.overlap(
+            meteor,
+            player,
+            () => {
+                player.hit();
                 //TODO: add an explosion animation that destroys others nerby meteors
-                this.destroy();
+                meteor.destroy();
             },
-            null,
-            this
         );
     }
 }
