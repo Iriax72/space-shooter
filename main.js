@@ -17,6 +17,9 @@ const config = {
         create: create,
         update: update
     },
+    physics: {
+        default: "arcade"
+    }
 };
 
 const game = new Phaser.Game(config);
@@ -35,11 +38,11 @@ function create() {
 function update(time, delta) {
     // Update all sprites:
     if (this.player) {
-        this.player.update(delta);
+        this.player.update();
     }
     if (this.meteors) {
         this.meteors.forEach(meteor => {
-            meteor.update(delta);
+            meteor.update();
         })
     }
     // Spawn meteors

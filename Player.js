@@ -2,6 +2,7 @@ export class Player extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y) {
         super(scene, x, y, "playerImg");
         scene.add.existing(this);
+        scene.physics.add.existing(this);
 
         this.setScale(0.3);
 
@@ -10,11 +11,11 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.velocity = new Phaser.Math.Vector2(0, 0);
     }
 
-    update(delta) {
-        this.move(delta);
+    update() {
+        this.move();
     }
 
-    move(delta) {
+    move() {
         let x_move = 0;
         let y_move = 0;
 
@@ -29,28 +30,15 @@ export class Player extends Phaser.GameObjects.Sprite{
 
         let movement = new Phaser.Math.Vector2(x_move, y_move);
 
-        const dt = delta / 1000;
-
         if (movement.length() > 0) {
             movement.normalize();
-            this.velocity = movement.scale(this.speed * dt);
+            this.body.setVelocity(movement.x * this.speed, movement.y * this.speed);
         } else {
-            this.velocity.scale(1 / 1.1);
-            if (this.velocity.length() < 0.1) {
-                this.velocity.set(0, 0);
+            // Amortissement : réduit la vélocité progressivement
+            this.body.velocity.scale(0.9);
+            if (this.body.velocity.length() < 10) {
+                this.body.setVelocity(0, 0);
             }
         }
-
-        this.x += this.velocity.x;
-        this.y += this.velocity.y;
-
-        if (this.x < 0)
-            {this.x = 0;}
-        else if (this.x > window.innerWidth)
-            {this.x = window.innerWidth;}
-        if (this.y < 0)
-            {this.y = 0;}
-        else if (this.y > window.innerHeight)
-            {this.y = Window.innerHeight;}
     }
 }
