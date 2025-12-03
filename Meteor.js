@@ -17,7 +17,7 @@ export class Meteor extends Phaser.GameObjects.Sprite{
         if (this.y > window.innerHeight + this.height) {
             this.destroy();
         }
-        checkCollision(this, this.scene.player);
+        this.checkCollision(this, this.scene.player);
     }
 
     checkCollision(meteor, player) {
