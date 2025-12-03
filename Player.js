@@ -7,12 +7,22 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.setScale(0.3);
 
         this.scene = scene;
+        this.hp = 5;
         this.speed = 200; //pixels per second
         this.velocity = new Phaser.Math.Vector2(0, 0);
     }
 
     update() {
         this.move();
+    }
+
+    hit() {
+        this.hp -= 1;
+        if (this.hp <= 0) {
+            // TODO: add game over menu
+        } else {
+            this.scene.cameras.main.shake(200, 0.01);
+        }
     }
 
     move() {

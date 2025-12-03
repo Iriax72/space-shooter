@@ -1,5 +1,6 @@
 import {Player} from "./Player.js"
 import {Meteor} from "./Meteor.js"
+import {Hp} from "./Hp.js"
 
 const gameContainer = document.querySelector("#game-container");
 
@@ -27,12 +28,17 @@ const game = new Phaser.Game(config);
 function preload() {
     this.load.image("playerImg", "./assets/player.png");
     this.load.image("meteorImg", "./assets/meteor.png");
+    this.load.spriteSheet("hpSprite", "./assets/hp-sprite.png", {
+        frameWidth: 32,
+        frameHeight: 32
+    })
 }
 
 function create() {
     createKeys(this);
     createPlayer(this);
     this.meteors = [];
+    this.hpDisplay = new Hp(this, 30, 30);
 }
 
 function update(time, delta) {
