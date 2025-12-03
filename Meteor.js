@@ -10,7 +10,7 @@ export class Meteor extends Phaser.GameObjects.Sprite{
         this.speed = speed;
         this.scene = scene;
 
-        this.setVelocity(0, this.speed);
+        this.body.setVelocity(0, this.speed);
     }
 
     update () { 
