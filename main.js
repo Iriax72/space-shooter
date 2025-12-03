@@ -28,7 +28,7 @@ const game = new Phaser.Game(config);
 function preload() {
     this.load.image("playerImg", "./assets/player.png");
     this.load.image("meteorImg", "./assets/meteor.png");
-    this.load.spriteSheet("hpSprite", "./assets/hp-sprite.png", {
+    this.load.spritesheet("hpSprite", "./assets/hp-sprite.png", {
         frameWidth: 32,
         frameHeight: 32
     })
