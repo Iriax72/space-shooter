@@ -21,7 +21,7 @@ export class Bullet extends Phaser.GameObjects.Sprite{
         }
     }
 
-    setMeteorCollision (target) {
+    setMeteorCollision () {
         this.scene.meteors.forEach(meteor => {
             this.scene.physics.add.overlap(
                 this,

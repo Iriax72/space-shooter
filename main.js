@@ -59,10 +59,15 @@ function update(time, delta) {
     if (this.meteors) {
         this.meteors.forEach(meteor => {
             meteor.update();
-        })
+        });
     }
     if (this.hpDisplay) {
         this.hpDisplay.update();
+    }
+    if (this.bullets) {
+        this.bullets.forEach(bullet => {
+            bullet.update();
+        });
     }
     // Spawn meteors
     if (Math.random() < 0.3 * (delta / 1000)) {
@@ -103,7 +108,7 @@ function spawnBullet(scene) {
         scene,
         scene.player.x,
         scene.player.y,
-        new Phaser.Math.Vector2(0, 0),
+        new Phaser.Math.Vector2(0, 836),
         500
     ));
 }
