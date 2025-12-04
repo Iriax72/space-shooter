@@ -29,9 +29,13 @@ export class Meteor extends Phaser.GameObjects.Sprite{
             player,
             () => {
                 player.hit();
-                //TODO: add an explosion animation that destroys others nerby meteors
-                this.destroy();
+                this.exploade();
             }
         );
+    }
+
+    exploade() {
+        // TODO: add explosion animation that destroy other nerby meteors
+        this.destroy();
     }
 }

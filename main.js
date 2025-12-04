@@ -1,6 +1,7 @@
-import {Player} from "./Player.js"
-import {Meteor} from "./Meteor.js"
-import {Hp} from "./Hp.js"
+import {Player} from "./Player.js";
+import {Meteor} from "./Meteor.js";
+import {Hp} from "./Hp.js";
+import {Bullet} from "./Bullet.js";
 
 const gameContainer = document.querySelector("#game-container");
 
@@ -21,7 +22,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: true
+            debug: false
         }
     }
 };
@@ -34,7 +35,11 @@ function preload() {
     this.load.spritesheet("hpSprite", "./assets/hp-sprite.png", {
         frameWidth: 640,
         frameHeight: 1600
-    })
+    });
+    this.load.spritesheet("bulletSprite", "./assets/bullet.png", {
+        frameWidth: 260,
+        frameHeight: 2000
+    });
 }
 
 function create() {
@@ -42,6 +47,7 @@ function create() {
     createPlayer(this);
     this.meteors = [];
     this.hpDisplay = new Hp(this, 30, 30);
+    this.bullets = [];
 }
 
 function update(time, delta) {
@@ -88,5 +94,15 @@ function spawnMeteor(scene) {
         -50,
         100 + 50 * Math.random(),
         1 + 1 * Math.random()
+    ));
+}
+
+function spawnBullet(scene) {
+    scene.bullets.push(new Bullet(
+        scene,
+        200,
+        200,
+        newPhaser.Math.Vector2(0, 0),
+        0
     ));
 }
