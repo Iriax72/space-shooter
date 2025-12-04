@@ -108,7 +108,7 @@ function spawnBullet(scene) {
         scene,
         scene.player.x,
         scene.player.y,
-        new Phaser.Math.Vector2(0, 836),
+        new Phaser.Math.Vector2(0, -1),
         500
     ));
 }
