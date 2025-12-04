@@ -1,4 +1,4 @@
-export class Bullet extends Phaser.GameObject.Sprite{
+export class Bullet extends Phaser.GameObjects.Sprite{
     constructor (scene, x, y, targetDir, speed){
         super (scene, x, y, 'bulletSprite');
         scene.add.existing(this);
