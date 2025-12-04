@@ -29,8 +29,8 @@ function preload() {
     this.load.image("playerImg", "./assets/player.png");
     this.load.image("meteorImg", "./assets/meteor.png");
     this.load.spritesheet("hpSprite", "./assets/hp-sprite.png", {
-        frameWidth: 32,
-        frameHeight: 32
+        frameWidth: 640,
+        frameHeight: 1600
     })
 }
 
@@ -50,6 +50,9 @@ function update(time, delta) {
         this.meteors.forEach(meteor => {
             meteor.update();
         })
+    }
+    if (this.hpDisplay) {
+        this.hpDisplay.update();
     }
     // Spawn meteors
     if (Math.random() < 0.3 * (delta / 1000)) {
