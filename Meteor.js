@@ -20,7 +20,11 @@ export class Meteor extends Phaser.GameObjects.Sprite{
             return;
         }
         // Vérifier collision avec le joueur
-        this.checkCollision(this.scene.player);
+        if (this.scene.player) {
+            this.checkCollision(this.scene.player);
+        } else {
+            alert(this.scene.player);
+        }
     }
 
     checkCollision(player) {
