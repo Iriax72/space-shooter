@@ -12,6 +12,7 @@ export class Meteor extends Phaser.GameObjects.Sprite{
 
         this.body.setVelocity(0, this.speed);
         alert(this.scene.player);
+        this.createCollision(this.scene.player);
     }
 
     update () { 
@@ -19,15 +20,9 @@ export class Meteor extends Phaser.GameObjects.Sprite{
             this.destroy();
             return;
         }
-        // Vérifier collision avec le joueur
-        if (this.scene.player) {
-            this.checkCollision(this.scene.player);
-        } else {
-            alert(this.scene.player);
-        }
     }
 
-    checkCollision(player) {
+    createCollision(player) {
         this.scene.physics.add.overlap(
             this,
             player,
