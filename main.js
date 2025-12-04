@@ -103,7 +103,7 @@ function spawnBullet(scene) {
         scene,
         200,
         200,
-        newPhaser.Math.Vector2(0, 0),
+        new Phaser.Math.Vector2(0, 0),
         0
     ));
 }
