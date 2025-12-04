@@ -18,11 +18,10 @@ export class Player extends Phaser.GameObjects.Sprite{
 
     hit() {
         this.hp -= 1;
+        this.scene.cameras.main.shake(200, 0.01);
         if (this.hp <= 0) {
             alert("Game Over\nur dead :(")
             // TODO: add game over menu
-        } else {
-            this.scene.cameras.main.shake(200, 0.01);
         }
     }
 
