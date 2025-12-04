@@ -24,15 +24,20 @@ export class Meteor extends Phaser.GameObjects.Sprite{
         }
     }
 
-    checkCollision(meteor, player) {
-        meteor.scene.physics.overlap(
-            meteor,
-            player,
-            () => {
-                player.hit();
-                //TODO: add an explosion animation that destroys others nerby meteors
-                meteor.destroy();
-            },
+    checkCollision(player) {
+        // Vérifier si la distance entre météore et joueur est < collision distance
+        const distance = Phaser.Math.Distance.Between(
+            this.x, this.y,
+            player.x, player.y
         );
+        const meteorRadius = (this.displayWidth + this.displayHeight) / 4;
+        const playerRadius = (player.displayWidth + player.displayHeight) / 4;
+        const collisionDistance = meteorRadius + playerRadius;
+        
+        if (distance < collisionDistance) {
+            player.hit();
+            //TODO: add an explosion animation that destroys others nerby meteors
+            this.destroy();
+        }
     }
 }
