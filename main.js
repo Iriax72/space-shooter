@@ -48,6 +48,7 @@ function create() {
     this.meteors = [];
     this.hpDisplay = new Hp(this, 30, 30);
     this.bullets = [];
+    spawnBullet(this);
 }
 
 function update(time, delta) {
