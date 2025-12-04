@@ -1,17 +1,19 @@
 export class Meteor extends Phaser.GameObjects.Sprite{
     constructor (scene, x, y, speed, size) {
         super(scene, x, y, "meteorImg");
+        // TODO Add diffrent images for meteor
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
         this.setScale(size);
-        this.body.setSize(this.width, this.height);
-        this.body.setOffset(this.width * (0.65 - size) /2, this.height * (0.65 - size) /2);
+        this.body.setSize(500 *size, 500 *size);
+        this.body.setOffset(250 *size, 250 *size);
 
         this.speed = speed;
         this.scene = scene;
 
         this.body.setVelocity(0, this.speed);
+        alert(this.scene.player);
         this.createCollision(this.scene.player);
     }
 
