@@ -6,7 +6,7 @@ export class Bullet extends Phaser.GameObjects.Sprite{
         this.setFrame(3);
 
         this.setScale(0.04);
-        this.body.setSize(30, 240);
+        this.body.setSize(100, 800);
         this.body.setOffset(0.2, 0);
 
         this.scene = scene;
