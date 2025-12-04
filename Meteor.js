@@ -5,15 +5,14 @@ export class Meteor extends Phaser.GameObjects.Sprite{
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
-        this.setScale(size);
-        this.body.setSize(500 *size, 500 *size);
-        this.body.setOffset(250 *size, 250 *size);
+        this.setScale(size/10);
+        this.body.setSize(200 *size, 200 *size);
+        this.body.setOffset(100 *size, 100 *size);
 
         this.speed = speed;
         this.scene = scene;
 
         this.body.setVelocity(0, this.speed);
-        alert(this.scene.player);
         this.createCollision(this.scene.player);
     }
 
