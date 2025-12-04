@@ -19,7 +19,10 @@ const config = {
         update: update
     },
     physics: {
-        default: "arcade"
+        default: "arcade",
+        arcade: {
+            debug: true
+        }
     }
 };
 
