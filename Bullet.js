@@ -11,7 +11,7 @@ export class Bullet extends Phaser.GameObjects.Sprite{
 
         this.scene = scene;
         this.speed = speed;
-        this.velocity = targetDir.normalize().scale(speed);
+        this.body.velocity = targetDir.normalize().scale(speed);
         this.setMeteorCollision();
     }
 
