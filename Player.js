@@ -6,7 +6,7 @@ export class Player extends Phaser.GameObjects.Sprite{
 
         this.setScale(0.3);
         this.body.setSize(this.width, this.height);
-        //this.body.setOffset(this.width * (1 - 0.3) /2, this.height * (1 - 0.3) /2);
+        this.body.setOffset(this.width /10, this.height /10);
 
         this.body.setCollideWorldBounds(true);
 
