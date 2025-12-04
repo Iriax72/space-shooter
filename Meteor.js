@@ -24,7 +24,7 @@ export class Meteor extends Phaser.GameObjects.Sprite{
     }
 
     checkCollision(player) {
-        overlap(
+        this.scene.physics.add.overlap(
             this,
             player,
             () => {
