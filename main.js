@@ -101,9 +101,9 @@ function spawnMeteor(scene) {
 function spawnBullet(scene) {
     scene.bullets.push(new Bullet(
         scene,
-        200,
-        200,
+        scene.player.x,
+        scene.player.y,
         new Phaser.Math.Vector2(0, 0),
-        0
+        500
     ));
 }
