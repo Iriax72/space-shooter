@@ -2,7 +2,7 @@ export class Hp extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y) {
         super(scene, x, y, "hpSprite");
         scene.add.existing(this);
-        this.setFrame(4);
+        this.setFrame(1);
 
         this.setScale(0.75);
         this.scene = scene;
