@@ -36,7 +36,7 @@ function preload() {
         frameWidth: 640,
         frameHeight: 1600
     });
-    this.load.spritesheet("bulletSprite", "./assets/bullet.png", {
+    this.load.spritesheet("bulletSprite", "./assets/bullets-sprite.png", {
         frameWidth: 260,
         frameHeight: 2000
     });
