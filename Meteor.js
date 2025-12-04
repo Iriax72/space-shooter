@@ -5,7 +5,7 @@ export class Meteor extends Phaser.GameObjects.Sprite{
         scene.physics.add.existing(this);
 
         this.setScale(size);
-        this.body.setSize(this.width * size, this.height * size);
+        this.body.setSize(this.width, this.height);
         this.body.setOffset(this.width * (1 - size) /2, this.height * (1 - size) /2);
 
         this.speed = speed;
