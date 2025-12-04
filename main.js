@@ -52,26 +52,21 @@ function create() {
 }
 
 function update(time, delta) {
-    // Update all sprites:
-    if (this.player) {
-        this.player.update(time, delta);
-    }
-    if (this.meteors) {
-        this.meteors.forEach(meteor => {
-            meteor.update();
-        });
-    }
-    if (this.hpDisplay) {
-        this.hpDisplay.update();
-    }
-    if (this.bullets) {
-        this.bullets.forEach(bullet => {
-            bullet.update();
-        });
-    }
+    const pointer = this.input.activePointer;
+
+    updateSprites(this, time, delta)
+
     // Spawn meteors
     if (Math.random() < 0.3 * (delta / 1000)) {
         spawnMeteor(this);
+    }
+    // Shoot bullets
+    if (this.oneKey.isDown) {
+        spawnBullet(this, {x: pointer.x, y: pointer.y}, 1);
+    } else if (this.twoKey.isDown) {
+        spawnBullet(this, {x: pointer.x, y: pointer.y}, 2);
+    } else if (this.threeKey.isDown) {
+        spawnBullet(this, {x: pointer.x, y:pointer.y}, 3)
     }
 }
 
@@ -91,6 +86,9 @@ function createKeys(scene) {
     scene.aKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     scene.sKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     scene.dKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    scene.oneKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+    scene.twoKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+    scene.threeKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
 }
 
 function spawnMeteor(scene) {
@@ -103,12 +101,31 @@ function spawnMeteor(scene) {
     ));
 }
 
-function spawnBullet(scene) {
+function spawnBullet(scene, target={x: scene.player.x, y: -1}, type=1) {
     scene.bullets.push(new Bullet(
         scene,
         scene.player.x,
         scene.player.y,
-        new Phaser.Math.Vector2(0, -1),
-        500
+        new Phaser.Math.Vector2(target.x - scene.player.x, target.y - scene.player.y),
+        type
     ));
+}
+
+function updateSprites(scene, time, delta) {
+    if (scene.player) {
+        scene.player.update(time, delta);
+    }
+    if (scene.meteors) {
+        scene.meteors.forEach(meteor => {
+            meteor.update();
+        });
+    }
+    if (scene.hpDisplay) {
+        scene.hoDisplay.update();
+    }
+    if (scene.bullets) {
+        scene.bullets.forEach(bullet => {
+            bullet.update();
+        });
+    }
 }
