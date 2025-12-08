@@ -121,7 +121,7 @@ function updateSprites(scene, time, delta) {
         });
     }
     if (scene.hpDisplay) {
-        scene.hoDisplay.update();
+        scene.hpDisplay.update();
     }
     if (scene.bullets) {
         scene.bullets.forEach(bullet => {
