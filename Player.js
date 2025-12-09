@@ -16,6 +16,13 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.hp = 5;
         this.speed = 200; //pixels per second
         this.velocity = new Phaser.Math.Vector2(0, 0);
+        this.isInCoolDown = false;
+
+        this.coolDownDurations = {
+            1: 600,
+            2: 1200,
+            3: 3000
+        }
     }
 
     update(time, delta) {
@@ -30,8 +37,13 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
 
     getAttackDatas() {
+        if (this.isInCoolDown) {
+            return null;
+        }
+
         const pointer = this.scene.input.activePointer;
         const target = {x: pointer.x, y: pointer.y};
+
         if (this.scene.oneKey.isDown) {
             return [this.scene, 1, target];
         }
@@ -41,6 +53,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         if (this.scene.threeKey.isDown) {
             return [this.scene, 3, target];
         }
+
         return null;
     }
 
@@ -81,6 +94,7 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
 
     attack(scene, type, target) {
+        this.beginCooldown(this.coolDownDurations.get(type));
         scene.bullets.push(new Bullet(
             scene,
             this.x,
@@ -88,5 +102,12 @@ export class Player extends Phaser.GameObjects.Sprite{
             new Phaser.Math.Vector2(target.x - this.x, target.y - this.y),
             type
         ));
+    }
+
+    beginCooldown(duration) {
+        this.isInCoolDown = true;
+        this.scene.delayedCall(duration, () => {
+            this.isInCoolDown = false;
+        })
     }
 }
