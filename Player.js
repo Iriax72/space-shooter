@@ -1,3 +1,5 @@
+import {Bullet} from "./Bullet";
+
 export class Player extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y) {
         super(scene, x, y, "playerImg");
@@ -17,7 +19,29 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
 
     update(time, delta) {
+        // movement
         this.move();
+
+        // attack
+        const attackDatas = this.getAttackDatas();
+        if (attackDatas) {
+            this.attack(...attackDatas)
+        }
+    }
+
+    getAttackDatas() {
+        const pointer = this.scene.input.activePointer;
+        const target = {x: pointer.x, y: pointer.y};
+        if (this.scene.oneKey.isDown) {
+            return [this.scene, 1, target];
+        }
+        if (this.scene.twoKey.isDown) {
+            return [this.scene, 2, target];
+        }
+        if (this.scene.threeKey.isDown) {
+            return [this.scene, 3, target];
+        }
+        return null;
     }
 
     hit() {
@@ -54,5 +78,15 @@ export class Player extends Phaser.GameObjects.Sprite{
                 this.body.setVelocity(0, 0);
             }
         }
+    }
+
+    attack(scene, type, target) {
+        scene.bullets.push(new Bullet(
+            scene,
+            this.x,
+            this.y,
+            new Phaser.Math.Vector2(target.x - this.x, target.y - this.y),
+            type
+        ));
     }
 }

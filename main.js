@@ -1,7 +1,7 @@
 import {Player} from "./Player.js";
 import {Meteor} from "./Meteor.js";
 import {Hp} from "./Hp.js";
-import {Bullet} from "./Bullet.js";
+// import {Bullet} from "./Bullet.js";
 
 const gameContainer = document.querySelector("#game-container");
 
@@ -48,7 +48,6 @@ function create() {
     this.meteors = [];
     this.hpDisplay = new Hp(this, 30, 30);
     this.bullets = [];
-    spawnBullet(this);
 }
 
 function update(time, delta) {
@@ -60,6 +59,7 @@ function update(time, delta) {
     if (Math.random() < 0.3 * (delta / 1000)) {
         spawnMeteor(this);
     }
+    /*
     // Shoot bullets
     if (this.oneKey.isDown) {
         spawnBullet(this, {x: pointer.x, y: pointer.y}, 1);
@@ -68,6 +68,7 @@ function update(time, delta) {
     } else if (this.threeKey.isDown) {
         spawnBullet(this, {x: pointer.x, y:pointer.y}, 3)
     }
+    */
 }
 
 // Functions
@@ -101,6 +102,7 @@ function spawnMeteor(scene) {
     ));
 }
 
+/*
 function spawnBullet(scene, target={x: scene.player.x, y: -1}, type=1) {
     scene.bullets.push(new Bullet(
         scene,
@@ -110,6 +112,7 @@ function spawnBullet(scene, target={x: scene.player.x, y: -1}, type=1) {
         type
     ));
 }
+*/
 
 function updateSprites(scene, time, delta) {
     if (scene.player) {
