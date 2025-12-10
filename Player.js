@@ -94,7 +94,7 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
 
     attack(scene, type, target) {
-        this.beginCooldown(this.coolDownDurations.get(type));
+        this.beginCooldown(this.coolDownDurations[type]);
         scene.bullets.push(new Bullet(
             scene,
             this.x,
