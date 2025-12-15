@@ -106,7 +106,7 @@ export class Player extends Phaser.GameObjects.Sprite{
 
     beginCooldown(duration) {
         this.isInCoolDown = true;
-        this.scene.delayedCall(duration, () => {
+        this.scene.time.delayedCall(duration, () => {
             this.isInCoolDown = false;
         })
     }
