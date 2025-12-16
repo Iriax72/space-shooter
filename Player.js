@@ -1,6 +1,7 @@
 import {Bullet} from "./Bullet.js";
 
-export class Player extends Phaser.GameObjects.Sprite{
+// abstract class
+class Player extends Phaser.GameObjects.Sprite{
     constructor(scene, x, y) {
         super(scene, x, y, "playerImg");
         scene.add.existing(this);
@@ -18,6 +19,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.velocity = new Phaser.Math.Vector2(0, 0);
         this.isInCoolDown = false;
 
+        // ca ca devrait peut etre etre gere par la class Bullet
         this.coolDownDurations = {
             1: 600,
             2: 1200,
@@ -37,10 +39,11 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
 
     getAttackDatas() {
-        if (this.isInCoolDown) {
+        throw new Error("la methode getAttackDatas d'un player d'oit etre override")
+        /*if (this.isInCoolDown) {
             return null;
         }
-
+        
         const pointer = this.scene.input.activePointer;
         const target = {x: pointer.x, y: pointer.y};
 
@@ -55,6 +58,7 @@ export class Player extends Phaser.GameObjects.Sprite{
         }
 
         return null;
+        */
     }
 
     hit() {
@@ -67,7 +71,8 @@ export class Player extends Phaser.GameObjects.Sprite{
     }
 
     move() {
-        let x_move = 0;
+        throw new Error("La methode move d'un Player doit etre override.");
+        /*let x_move = 0;
         let y_move = 0;
 
         if (this.scene.dKey.isDown || this.scene.cursors.right.isDown)
@@ -90,7 +95,7 @@ export class Player extends Phaser.GameObjects.Sprite{
             if (this.body.velocity.length() < 10) {
                 this.body.setVelocity(0, 0);
             }
-        }
+        }*/
     }
 
     attack(scene, type, target) {
@@ -109,5 +114,84 @@ export class Player extends Phaser.GameObjects.Sprite{
         this.scene.time.delayedCall(duration, () => {
             this.isInCoolDown = false;
         })
+    }
+}
+
+export class PlayerMobile extends Player{
+    constructor(scene, x, y) {
+        super(scene, x, y);
+    }
+
+    move() {
+        // TODO
+    }
+
+    getAttackDatas() {
+        if(this.isInCoolDown) {
+            return null;
+        }
+
+        // TODO
+    }
+}
+
+export class PlayerDesktop extends Player{
+    constructor(scene, x, y) {
+        super(scene, x, y);
+    }
+
+    move() {
+        let x_move = 0;
+        let y_move = 0;
+
+        if (this.scene.dKey.isDown || this.scene.cursors.right.isDown) {
+            x_move += 1;
+        }
+        if (this.scene.aKey.isDown || this.scene.cursors.left.isDown) {
+            x_move -= 1;
+        }
+        if (this.scene.wKey.isDown || this.scene.cursors.up.isDown) {
+            y_move -= 1;
+        }
+        if (this.scene.sKey.isDown || this.scene.cursors.down.isDown) {
+            y_move += 1;
+        }
+
+        let movement = new Phaser.Math.Vector2(x_move, y_move);
+
+        if (movement.length > 0) {
+            movement = movement.normalize();
+            this.body.setVelocity(
+                movement.x * this.speed, 
+                movement.y * this.speed
+            );
+        } else {
+            this.body.velocity.scale(0.9);
+            if (this.body.velocity < 10) {
+                this.body.setVelocity(0, 0);
+            }
+        }
+    }
+
+    getAttackDatas() {
+        if (this.isInCoolDown) {
+            return null;
+        }
+
+        const scene = this.scene
+        const pointer = scene.input.activePointer;
+        const target = {x: pointer.x, y: pointer.y};
+
+        if (scene.oneKey.isDown) {
+            return [scene, 1, target];
+        }
+        if (scene.twoKey.isDown) {
+            return [scene, 2, target];
+        }
+        if (scene.threeKey.isDown) {
+            return [scene, 3, target];
+        }
+
+        return null;
     }
 }

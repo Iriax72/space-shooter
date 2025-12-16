@@ -1,4 +1,6 @@
-import {Player} from "./Player.js";
+import "./Datas.js";
+
+import {PlayerDesktop, PlayerMobile} from "./Player.js";
 import {Meteor} from "./Meteor.js";
 import {Hp} from "./Hp.js";
 // import {Bullet} from "./Bullet.js";
@@ -24,6 +26,15 @@ const config = {
         arcade: {
             debug: true
         }
+    },
+    plugins: {
+        scene: [
+            {
+                key: 'rexVirtualJoystick',
+                plugin: rexvirtualjoystickplugin,
+                mapping: 'rexVirtualJoystick'
+            }
+        ]
     }
 };
 
@@ -43,7 +54,11 @@ function preload() {
 }
 
 function create() {
-    createKeys(this);
+    if (Datas.isUserMobile()) {
+        createMobileKeys(this);
+    } else {
+        createDesktopKeys(this);
+    }
     createPlayer(this);
     this.meteors = [];
     this.hpDisplay = new Hp(this, 30, 30);
@@ -74,14 +89,34 @@ function update(time, delta) {
 // Functions
 
 function createPlayer(scene) {
-    scene.player = new Player(
-        scene,
-        window.innerWidth / 2,
-        window.innerHeight - 120
-    );
+    if (Datas.isUserMobile()) {
+        scene.player = new PlayerMobile(
+            scene,
+            window.innerWidth / 2,
+            window.innerHeight - 120,
+        );
+    } else {
+        scene.player = new PlayerDesktop(
+            scene,
+            window.innerWidth / 2,
+            window.innerHeight - 120
+        );
+    }
 }
 
-function createKeys(scene) {
+function createMobileKeys(scene) {
+    scene.joystick = scene.rexVirtualJoystick.add({
+        x: 100,
+        y: window.innerHeight -100,
+        radius: 50,
+        base: scene.add.circle(0, 0, 60, 0x444444),
+        thumb: scene.add.circle(0, 0, 30, 0xaaaaaa),
+        deadZone: 10,
+        fixed: false
+    });
+}
+
+function createDesktopKeys(scene) {
     scene.cursors = scene.input.keyboard.createCursorKeys();
     scene.wKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     scene.aKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
