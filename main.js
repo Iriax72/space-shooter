@@ -1,4 +1,4 @@
-import "./Datas.js";
+import {Datas} from "./Datas.js";
 
 import {PlayerDesktop, PlayerMobile} from "./Player.js";
 import {Meteor} from "./Meteor.js";
