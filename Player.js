@@ -173,10 +173,10 @@ export class PlayerDesktop extends Player{
                 movementDir.y * this.speed
             );
         } else {
-            if (this.body.velocity < 10) {
+            if (this.body.velocity.length() < 10) {
                 return new Phaser.Math.Vector2(0, 0);
             }
-            return new Phaser.Math.Vector2(this.body.velocity.scale(0.9))
+            return this.body.velocity.scale(0.9);
         }
     }
 
