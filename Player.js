@@ -29,7 +29,7 @@ class Player extends Phaser.GameObjects.Sprite{
 
     update(time, delta) {
         // movement
-        this.move();
+        this.body.setVelocity(this.move());
 
         // attack
         const attackDatas = this.getAttackDatas();
@@ -123,14 +123,21 @@ export class PlayerMobile extends Player{
     }
 
     move() {
-        // TODO
+        if (this.scene.joystick.force === 0) 
+            {return;}
+
+        const joystick = this.scene.joystick;
+        let movement = new Phaser.Math.Vector2(Math.cos(joystick.angle), Math.sin(joystick.angle));
+        movement = movement.scale(joystick.force);
+        movement = movement.scale(this.speed);
+
+        return movement;
     }
 
     getAttackDatas() {
         if(this.isInCoolDown) {
             return null;
         }
-
         // TODO
     }
 }
@@ -157,19 +164,19 @@ export class PlayerDesktop extends Player{
             y_move += 1;
         }
 
-        let movement = new Phaser.Math.Vector2(x_move, y_move);
+        let movementDir = new Phaser.Math.Vector2(x_move, y_move);
 
-        if (movement.length > 0) {
-            movement = movement.normalize();
-            this.body.setVelocity(
-                movement.x * this.speed, 
-                movement.y * this.speed
+        if (movementDir.length > 0) {
+            movementDir = movementDir.normalize();
+            return new Phaser.Math.Vector2(
+                movementDir.x * this.speed, 
+                movementDir.y * this.speed
             );
         } else {
-            this.body.velocity.scale(0.9);
             if (this.body.velocity < 10) {
-                this.body.setVelocity(0, 0);
+                return new Phaser.Math.Vector2(0, 0);
             }
+            return new Phaser.Math.Vector2(this.body.velocity.scale(0.9))
         }
     }
 
