@@ -107,8 +107,8 @@ function createPlayer(scene) {
 function createMobileKeys(scene) {
     try{
         scene.joystick = scene.rexVirtualJoystick.add({
-            x: 100,
-            y: window.innerHeight -100,
+            x: 300,
+            y: window.innerHeight -300,
             radius: 50,
             base: scene.add.circle(0, 0, 60, 0x444444),
             thumb: scene.add.circle(0, 0, 30, 0xaaaaaa),
