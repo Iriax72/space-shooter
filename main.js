@@ -103,6 +103,11 @@ function createPlayer(scene) {
 
 function createMobileKeys(scene) {
     try{
+        // Check if rexVirtualJoystick is loaded
+        if (typeof rexVirtualJoystick === 'undefined') {
+            alert("rexVirtualJoystick plugin not loaded. Check CDN script.");
+            return;
+        }
         // Install rexVirtualJoystick plugin if not already installed
         if (!scene.rexVirtualJoystick) {
             scene.plugins.install('rexVirtualJoystick', rexVirtualJoystick, true);
