@@ -5,6 +5,9 @@ import {Meteor} from "./Meteor.js";
 import {Hp} from "./Hp.js";
 // import {Bullet} from "./Bullet.js";
 
+// import plugin:
+const rexVirtualJoystick = window.rexVirtualJoystick;
+
 const gameContainer = document.querySelector("#game-container");
 
 const config = {
@@ -28,13 +31,7 @@ const config = {
         }
     },
     plugins: {
-        scene: [
-            {
-                key: 'rexVirtualJoystick',
-                plugin: rexVirtualJoystick,
-                mapping: 'rexVirtualJoystick'
-            }
-        ]
+        scene: []
     }
 };
 
@@ -106,6 +103,10 @@ function createPlayer(scene) {
 
 function createMobileKeys(scene) {
     try{
+        // Install rexVirtualJoystick plugin if not already installed
+        if (!scene.rexVirtualJoystick) {
+            scene.plugins.install('rexVirtualJoystick', rexVirtualJoystick, true);
+        }
         scene.joystick = scene.rexVirtualJoystick.add({
             x: 300,
             y: window.innerHeight -300,
