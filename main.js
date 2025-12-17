@@ -1,10 +1,10 @@
 import {Datas} from "./Datas.js";
-alert("Datas importe");
+
 import {PlayerDesktop, PlayerMobile} from "./Player.js";
 import {Meteor} from "./Meteor.js";
 import {Hp} from "./Hp.js";
 // import {Bullet} from "./Bullet.js";
-alert("tout est importe");
+
 const gameContainer = document.querySelector("#game-container");
 
 const config = {
@@ -39,7 +39,7 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-alert("game creee")
+
 function preload() {
     this.load.image("playerImg", "./assets/player.png");
     this.load.image("meteorImg", "./assets/meteor.png");
@@ -51,20 +51,24 @@ function preload() {
         frameWidth: 260,
         frameHeight: 2000
     });
-    alert("preload termine")
 }
 
 function create() {
+    alert("debut de create");
     if (Datas.isUserMobile()) {
         createMobileKeys(this);
     } else {
         createDesktopKeys(this);
     }
+    alert(1);
     createPlayer(this);
+    alert(2);
     this.meteors = [];
+    alert(3);
     this.hpDisplay = new Hp(this, 30, 30);
+    alert(4);
     this.bullets = [];
-    alert("create execute")
+    alert("create execute");
 }
 
 function update(time, delta) {
