@@ -1,4 +1,4 @@
-export default class Datas {
+export class Datas {
     static isUserMobile() {
         if (navigator.userAgentData) {
             return navigator.userAgentData.mobile;
