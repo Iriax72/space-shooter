@@ -127,8 +127,9 @@ export class PlayerMobile extends Player{
             {return;}
 
         const joystick = this.scene.joystick;
-        let movement = new Phaser.Math.Vector2(Math.cos(joystick.angle), Math.sin(joystick.angle));
-        movement = movement.scale(joystick.force);
+        const angleRad = Phaser.Math.DegToRad(joystick.angle);
+        let movement = new Phaser.Math.Vector2(Math.cos(angleRad), Math.sin(angleRad));
+        movement = movement.scale(joystick.force / 100);
         movement = movement.scale(this.speed);
 
         return movement;
