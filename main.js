@@ -105,15 +105,19 @@ function createPlayer(scene) {
 }
 
 function createMobileKeys(scene) {
-    scene.joystick = scene.rexVirtualJoystick.add({
-        x: 100,
-        y: 100, //window.innerHeight -100,
-        radius: 50,
-        //base: scene.add.circle(0, 0, 60, 0x444444),
-        //thumb: scene.add.circle(0, 0, 30, 0xaaaaaa),
-        //deadZone: 10,
-        //fixed: false
-    });
+    try{
+        scene.joystick = scene.rexVirtualJoystick.add({
+            x: 100,
+            y: 100, //window.innerHeight -100,
+            radius: 50,
+            //base: scene.add.circle(0, 0, 60, 0x444444),
+            //thumb: scene.add.circle(0, 0, 30, 0xaaaaaa),
+            //deadZone: 10,
+            //fixed: false
+        });
+    } catch (e) {
+        alert("Erreur joystick: " + e.message);
+    }
 }
 
 function createDesktopKeys(scene) {

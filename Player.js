@@ -123,7 +123,7 @@ export class PlayerMobile extends Player{
     }
 
     move() {
-        if (this.scene.joystick.force === 0) 
+        if (!this.scene.joystick || this.scene.joystick.force === 0) 
             {return;}
 
         const joystick = this.scene.joystick;
