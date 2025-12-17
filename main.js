@@ -55,10 +55,8 @@ function preload() {
 
 function create() {
     if (Datas.isUserMobile()) {
-        alert("1, mobile");
         createMobileKeys(this);
     } else {
-        alert("1, desktop");
         createDesktopKeys(this);
     }
     createPlayer(this);
@@ -107,17 +105,15 @@ function createPlayer(scene) {
 }
 
 function createMobileKeys(scene) {
-    alert("debut de createmobilekeys");
     scene.joystick = scene.rexVirtualJoystick.add({
         x: 100,
-        y: window.innerHeight -100,
+        y: 100, //window.innerHeight -100,
         radius: 50,
-        base: scene.add.circle(0, 0, 60, 0x444444),
-        thumb: scene.add.circle(0, 0, 30, 0xaaaaaa),
-        deadZone: 10,
-        fixed: false
+        //base: scene.add.circle(0, 0, 60, 0x444444),
+        //thumb: scene.add.circle(0, 0, 30, 0xaaaaaa),
+        //deadZone: 10,
+        //fixed: false
     });
-    alert("createMobileKeys termine");
 }
 
 function createDesktopKeys(scene) {
